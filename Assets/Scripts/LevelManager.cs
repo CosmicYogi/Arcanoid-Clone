@@ -18,4 +18,9 @@ public class LevelManager : MonoBehaviour {
 	public void quitGame(){
 		Application.Quit();
 	}
+
+	public void LoadNextLevel(){
+		UnityEngine.SceneManagement.SceneManager.LoadScene (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+
+	}
 }

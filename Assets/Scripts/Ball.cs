@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Ball : MonoBehaviour {
 
-	public Paddle paddle;
+	private Paddle paddle;
 	Vector3 paddleToBallVector;
 	bool hasStarted = false;
 	// Use this for initialization
 	void Start () {
+		paddle = GameObject.FindObjectOfType<Paddle> ();
 		paddleToBallVector = this.transform.position - paddle.transform.position;
 		// print ("didtence b/w ball & paddle is "+paddleToBallVector.y);
 	}
@@ -19,7 +20,7 @@ public class Ball : MonoBehaviour {
 			gameObject.transform.position = paddle.transform.position + paddleToBallVector;
 			if (Input.GetMouseButtonDown (0)) {
 				print ("Mouse clicked, ball launched");
-				this.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 10);
+				this.GetComponent<Rigidbody2D> ().velocity = new Vector2 (3, 10);
 				hasStarted = true;
 			}
 		}

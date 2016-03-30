@@ -2,10 +2,15 @@
 using System.Collections;
 
 public class LooseCollider : MonoBehaviour {
-	public LevelManager lm;
+	private LevelManager lm;
+
+	void Start(){
+		lm = GameObject.FindObjectOfType<LevelManager> ();
+	}
+
 	void OnTriggerEnter2D(Collider2D coll){
 		print ("trigger");
-		lm.loadLevel ("Scenes/Win");
+		lm.loadLevel ("Scenes/Loose");
 	}
 	void OnCollisionEnter2D(Collision2D coll){
 		print ("collision");
