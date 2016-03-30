@@ -8,14 +8,22 @@ public class Brick : MonoBehaviour {
 	private int timeHits;
 	private LevelManager lm;
 	public static int breakableCount = 0;
-	private bool isBreakable;
+	private bool isBreakable ;
 	// Use this for initialization
 	void Start () {
-		// Ye doubt hai, ki ye isBreakable baar baar kaise call ho raha hai jabki
-		// Start method to sift at the time of start hi call hota hai.
-		isBreakable = (this.gameObject.tag == "Breakable");
+		if (gameObject.tag == "Breakable"){
+			isBreakable = true;
+		}
+		if (gameObject.tag == "UnBreakable"){
+			isBreakable = false;
+		}
+		// Samaj aa gaya ye kyon ho raha hai.
+		// This is because
+		// breakableCount is a static variable of Brick class.
+		// and because it is there on every brick so the Start() method will be called the number of Bricks are there.
+		// Ones for every brick.
 		print ("is Breakable is "+isBreakable);
-		if (isBreakable) {
+		if (isBreakable) { 
 			breakableCount++;
 			//print (breakableCount);
 		}
@@ -30,7 +38,9 @@ public class Brick : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D target){
 		AudioSource.PlayClipAtPoint (crack,new Vector3(0,0,0));
-
+		// the constructor takes two argumests 1st is audio file 2nd is the position at which the sound plays.
+		// It gives like 3D sound effect because if you give the position via this.transform.position
+		// Then every time brick will break it will be at different distace from Audio listener which is attached to Main camera.
 		if (isBreakable){
 			HandleHits ();
 		}

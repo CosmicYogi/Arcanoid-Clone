@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour {
 	
 	}
 	public void  loadLevel(string name){
+		Brick.breakableCount = 0;
 		UnityEngine.SceneManagement.SceneManager.LoadScene (name);
 	}
 	public void quitGame(){
@@ -20,6 +21,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void LoadNextLevel(){
+		Brick.breakableCount = 0;
 		UnityEngine.SceneManagement.SceneManager.LoadScene (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
 
 	}

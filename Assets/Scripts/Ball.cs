@@ -26,6 +26,14 @@ public class Ball : MonoBehaviour {
 		}
 	}
 	void OnCollisionEnter2D(Collision2D target){
+		Vector2 randomness = new Vector2 (Random.Range (0f, 0.2f), Random.Range (0f, 0.2f));
+		print (randomness);
+
+		if (gameObject.GetComponent<Rigidbody2D> ().velocity.x > 0)
+			gameObject.GetComponent<Rigidbody2D> ().velocity += randomness;
+
+		if (gameObject.GetComponent<Rigidbody2D> ().velocity.x < 0)
+			gameObject.GetComponent<Rigidbody2D> ().velocity += -randomness;
 		if (!hasStarted) {
 			GetComponent<AudioSource>().Play (); //This would be like this in Unity 5
 		}
