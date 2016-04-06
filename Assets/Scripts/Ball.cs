@@ -17,7 +17,7 @@ public class Ball : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!hasStarted) {
-			gameObject.transform.position = paddle.transform.position + paddleToBallVector;
+			gameObject.transform.position = paddle.transform.position + paddleToBallVector; //remember this one.
 			if (Input.GetMouseButtonDown (0)) {
 				print ("Mouse clicked, ball launched");
 				this.GetComponent<Rigidbody2D> ().velocity = new Vector2 (3, 10);
@@ -29,13 +29,19 @@ public class Ball : MonoBehaviour {
 		Vector2 randomness = new Vector2 (Random.Range (0f, 0.2f), Random.Range (0f, 0.2f));
 		print (randomness);
 
-		if (gameObject.GetComponent<Rigidbody2D> ().velocity.x > 0)
-			gameObject.GetComponent<Rigidbody2D> ().velocity += randomness;
 
-		if (gameObject.GetComponent<Rigidbody2D> ().velocity.x < 0)
-			gameObject.GetComponent<Rigidbody2D> ().velocity += -randomness;
+		if (gameObject.GetComponent<Rigidbody2D> ().velocity.x > 0 && gameObject.GetComponent<Rigidbody2D> ().velocity.y > 0) 
+			gameObject.GetComponent<Rigidbody2D> ().velocity += new Vector2 (randomness.x, randomness.y);
+	    else if (gameObject.GetComponent<Rigidbody2D> ().velocity.x > 0 && gameObject.GetComponent<Rigidbody2D> ().velocity.y < 0)
+			gameObject.GetComponent<Rigidbody2D> ().velocity += new Vector2 (randomness.x, -randomness.y);
+		else if (gameObject.GetComponent<Rigidbody2D> ().velocity.x < 0 && gameObject.GetComponent<Rigidbody2D> ().velocity.y > 0)
+			gameObject.GetComponent<Rigidbody2D> ().velocity += new Vector2 (-randomness.x, randomness.y);
+		else if (gameObject.GetComponent<Rigidbody2D> ().velocity.x < 0 && gameObject.GetComponent<Rigidbody2D> ().velocity.y < 0)
+			gameObject.GetComponent<Rigidbody2D> ().velocity += new Vector2 (-randomness.x, -randomness.y);
+		
 		if (!hasStarted) {
 			GetComponent<AudioSource>().Play (); //This would be like this in Unity 5
 		}
 	}
 }
+
