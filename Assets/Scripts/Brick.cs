@@ -9,8 +9,11 @@ public class Brick : MonoBehaviour {
 	private LevelManager lm;
 	public static int breakableCount = 0;
 	private bool isBreakable ;
+	public GameObject smoke;
+	private Color tempColor;
 	// Use this for initialization
 	void Start () {
+
 		if (gameObject.tag == "Breakable"){
 			isBreakable = true;
 		}
@@ -44,6 +47,9 @@ public class Brick : MonoBehaviour {
 		if (isBreakable){
 			HandleHits ();
 		}
+		// for changing the color of smoke
+		tempColor = this.GetComponent<SpriteRenderer> ().color;
+		smoke.GetComponent <ParticleSystem>().startColor = tempColor;
 	}
 
 	void HandleHits(){
@@ -54,6 +60,7 @@ public class Brick : MonoBehaviour {
 			print (breakableCount);
 			lm.BrickDestroyed (); // Ye messages waala natak bhi samaj nahi aaya hai. Doubt puchna hai.
 			Destroy (gameObject);
+			Instantiate (smoke, new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 		} else {
 			LoadSprites ();
 		}
