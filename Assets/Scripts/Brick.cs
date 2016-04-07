@@ -66,12 +66,13 @@ public class Brick : MonoBehaviour {
 		}
 	}
 
+	//To avoid confusion keept in mind that LoadSprites is only called when timeHits < maxHits.
 	void LoadSprites(){
 		int spriteIndex = timeHits - 1;
 		this.GetComponent<SpriteRenderer> ().sprite = sprite [spriteIndex];
 	}
-	// TODO Remove this method once we actually win.
-	void simulateWin(){
-		lm.LoadNextLevel ();
-	}
+//	// TODO Remove this method once we actually win.
+//	void simulateWin(){
+//		lm.LoadNextLevel ();
+//	}
 }
