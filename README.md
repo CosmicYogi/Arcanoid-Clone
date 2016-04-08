@@ -14,7 +14,7 @@ Paddle.cs - Movement of paddle.
 
 ##Scenes
 ###Start
-
+![Start Scene](/Assets/ScreenShots/Start.png)
 ###Level_01
 
 ###Level_02
